@@ -76,7 +76,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def openInputFile(self):
         '''Open file directory and set it as text into lineEditDirInput, it also calls some additional methods'''
-        file_dir = QFileDialog.getOpenFileName(self,
+        file_dir, _ = QFileDialog.getOpenFileName(self,
                                                "Выбор текста",
                                                getcwd() + '/file_manager/input',
                                                "Document (*.pdf)"
@@ -140,10 +140,11 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 def excepthook(exc_type, exc_value, exc_tb):
-    '''This func shows error text intead of "silent" QT crash'''
+    '''This func shows error text instead of "silent" QT crash'''
     tb = "".join(traceback.format_exception(exc_type, exc_value, exc_tb))
     print("Oбнаружена ошибка !:", tb)
 
+sys.excepthook = excepthook
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
